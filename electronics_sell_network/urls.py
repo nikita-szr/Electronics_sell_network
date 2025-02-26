@@ -32,7 +32,7 @@ schema_view = get_schema_view(
       license=openapi.License(name="MIT License"),
    ),
    public=True,
-   permission_classes=(permissions.AllowAny,),  # Убедитесь, что доступ к документации открыт
+   permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
