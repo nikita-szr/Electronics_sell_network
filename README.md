@@ -1,48 +1,68 @@
-# Electronics sell network
-Сервис, сети по продаже электроники
+# Electronics Network API
 
-## Использование c помощью **Docker**
-* В виртуальном окружении загрузите зависимости:
-  
-```sh
-$ pip install -r requirements.txt
+## Описание
+Данное веб-приложение представляет собой API-интерфейс и админ-панель для управления сетью по продаже электроники. Приложение построено на Django и Django REST Framework (DRF), поддерживает иерархическую структуру сети и фильтрацию данных.
+
+## Установка и запуск
+
+### 1. Клонирование репозитория
+```bash
+git clone https://github.com/nikita-szr/Electronics_sell_network/tree/feature_1
+cd electronics_network
 ```
 
-* Добавьте файл **.env** (по примеру **.env.sample**)
-* Запустите терминал и выполните команду:
-
-```sh
-$ docker-compose up -d --build
+### 2. Установка зависимостей
+Создайте и активируйте виртуальное окружение, затем установите зависимости:
+```bash
+python -m venv venv
+source venv/bin/activate  # Для Windows: venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-## Разработка
+### 3. Применение миграций и создание суперпользователя
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+```
 
-Реализовано приложение:
-`network` - API представление 
+### 4. Запуск сервера
+```bash
+python manage.py runserver
+```
 
-### network:
+## Использование API
 
-Модель **NetworkNode**:
+### Доступные эндпоинты
+- `/api/network_nodes/` — CRUD-операции для узлов сети
+- `/api/products/` — CRUD-операции для продуктов
 
-* *name* - Название
-* *email* - Почта
-* *country* - Страна
-* *city*  - Город
-* *street* - Улица
-* house_number* - Номер дома
-* supplier* - Поставщик
-* debt* - Задолженность
-* created_at* - Время создания
+### Примеры запросов
+#### Получение списка узлов сети
+```bash
+GET /api/network_nodes/
+```
+#### Фильтрация узлов сети по стране
+```bash
+GET /api/network_nodes/?country=Россия
+```
 
-Модель **Product**:
+## Админ-панель
+Админ-панель доступна по адресу:
+```bash
+http://127.0.0.1:8000/admin/
+```
 
-* *network_node*
-* *name* - Название
-* *model* - Модель
-* *release_date*  - Дата релиза
+## Права доступа
+Только активные сотрудники могут работать с API. Для аутентификации используйте `/api-auth/login/`.
 
+## Дополнительные функции
+- Фильтр по названию города в админке
+- Очистка задолженности через `admin action`
 
-#### Контроллеры:
+## Зависимости
+- requirements.txt
 
-* CRUD для модели поставщика
+## Запуск через docker
+- docker-compose up --build
 
