@@ -17,8 +17,14 @@ class NetworkNodeAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'country', 'supplier', 'debt')
     list_filter = ('city',)
     search_fields = ('name', 'city')
+    raw_id_fields = ('supplier',)
     inlines = [ProductInline]
     actions = [clear_debt]
+
+    def get_hierarchy_level(self, obj):
+        return obj.get_hierarchy_level()
+
+    get_hierarchy_level.short_description = "Уровень в сети"
 
 
 @admin.register(Product)

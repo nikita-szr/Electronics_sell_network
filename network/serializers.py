@@ -9,9 +9,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class NetworkNodeSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True, read_only=True)
+    products = ProductSerializer(many=True, read_only=False, required=False)
 
     class Meta:
         model = NetworkNode
-        fields = '__all__'
+        fields = ('id', 'name', 'email', 'country', 'city', 'street', 'house_number', 'supplier', 'created_at', 'products')
         read_only_fields = ('debt',)
+
+    def update(self, instance, validated_data):
+        """Запрещает обновление 'debt' через API"""
+        validated_data.pop('debt', None)
+        return super().update(instance, validated_data)
