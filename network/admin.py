@@ -30,4 +30,3 @@ class NetworkNodeAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'model', 'release_date', 'network_node')
-

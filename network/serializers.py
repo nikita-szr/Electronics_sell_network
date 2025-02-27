@@ -13,7 +13,8 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NetworkNode
-        fields = ('id', 'name', 'email', 'country', 'city', 'street', 'house_number', 'supplier', 'created_at', 'products')
+        fields = ('id', 'name', 'email', 'country', 'city', 'street', 'house_number', 'supplier', 'created_at',
+                  'products')
         read_only_fields = ('debt',)
 
     def update(self, instance, validated_data):
